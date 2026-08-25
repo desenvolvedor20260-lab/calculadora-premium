@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Premium - Descubra seu resultado</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">📊</div>
+                <h1>CALCULADORA PREMIUM</h1>
+            </div>
+            <p class="tagline">Descubra seu resultado</p>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- CALCULADORA -->
+            <section id="calculator-section" class="section active">
+                <div class="card calculator-card">
+                    <h2>Preencha os dados abaixo</h2>
+                    <p class="description">Insira o valor e o percentual para calcular seu resultado de forma rápida e simples.</p>
+
+                    <div class="input-group">
+                        <label for="value">Valor</label>
+                        <input type="number" id="value" placeholder="Digite o valor" step="0.01" min="0">
+                        <span class="input-error" id="value-error"></span>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="percentage">Percentual (%)</label>
+                        <input type="number" id="percentage" placeholder="Digite o percentual" step="0.01" min="0" max="100">
+                        <span class="input-error" id="percentage-error"></span>
+                    </div>
+
+                    <button id="calculate-btn" class="btn btn-primary btn-lg">
+                        <span class="btn-text">CALCULAR</span>
+                        <span class="btn-loader" style="display: none;">
+                            <span class="spinner"></span>
+                        </span>
+                    </button>
+
+                    <div id="calc-error" class="error-message" style="display: none;"></div>
+                </div>
+            </section>
+
+            <!-- RESULTADO BLOQUEADO -->
+            <section id="locked-result-section" class="section" style="display: none;">
+                <div class="card locked-card">
+                    <div class="lock-icon">🔒</div>
+                    <h2>Seu resultado está pronto!</h2>
+                    <p class="result-value" id="result-value">Carregando...</p>
+                    <p class="locked-text">Desbloqueie seu resultado completo por apenas</p>
+                    <div class="price">R$ 24,90</div>
+
+                    <button id="unlock-btn" class="btn btn-unlock btn-lg">
+                        VER MEU RESULTADO — R$ 24,90
+                    </button>
+
+                    <button id="back-btn" class="btn btn-secondary btn-sm">
+                        Voltar para calculadora
+                    </button>
+                </div>
+            </section>
+
+            <!-- PAGAMENTO -->
+            <section id="payment-section" class="section" style="display: none;">
+                <div class="card payment-card">
+                    <div class="payment-header">
+                        <h2>Seu resultado está pronto! 🔒</h2>
+                        <p>Para visualizar seu resultado completo, faça o pagamento único de</p>
+                    </div>
+
+                    <div class="payment-amount">R$ 24,90</div>
+
+                    <div class="payment-method">
+                        <div class="method-icon">💳</div>
+                        <p class="method-name">PIX</p>
+                    </div>
+
+                    <!-- QR CODE -->
+                    <div id="qrcode-container" class="qrcode-container" style="display: none;">
+                        <p class="qrcode-label">Escaneie o QR Code com seu banco</p>
+                        <div id="qrcode" class="qrcode"></div>
+                    </div>
+
+                    <!-- COPIA E COLA -->
+                    <div id="pix-copy-container" class="pix-copy-container" style="display: none;">
+                        <p class="pix-label">Ou copie o código Pix</p>
+                        <div class="pix-copy-box">
+                            <input type="text" id="pix-copy" class="pix-input" readonly>
+                            <button id="copy-btn" class="btn btn-copy">
+                                <span class="copy-text">COPIAR PIX</span>
+                                <span class="copy-icon">📋</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- PAGAMENTO GERADO -->
+                    <div id="payment-loading" class="payment-loading" style="display: none;">
+                        <div class="spinner"></div>
+                        <p>Gerando QR Code e Pix...</p>
+                    </div>
+
+                    <!-- STATUS -->
+                    <div id="payment-status" class="payment-status">
+                        <div class="status-icon">⏳</div>
+                        <p id="status-text">Aguardando pagamento...</p>
+                    </div>
+
+                    <!-- BOTÕES -->
+                    <div class="payment-actions">
+                        <button id="verify-payment-btn" class="btn btn-secondary btn-sm">
+                            VERIFICAR PAGAMENTO
+                        </button>
+                        <button id="cancel-payment-btn" class="btn btn-secondary btn-sm">
+                            Cancelar
+                        </button>
+                    </div>
+
+                    <div id="payment-error" class="error-message" style="display: none;"></div>
+                </div>
+            </section>
+
+            <!-- RESULTADO LIBERADO -->
+            <section id="unlocked-result-section" class="section" style="display: none;">
+                <div class="card unlocked-card">
+                    <div class="success-icon">✅</div>
+                    <h2>Pagamento confirmado!</h2>
+
+                    <div class="result-container">
+                        <p class="result-label">🎉 SEU RESULTADO</p>
+                        <div class="result-box">
+                            <span id="final-result" class="final-result">-</span>
+                        </div>
+                    </div>
+
+                    <p class="result-details">
+                        Você pagou R$ 24,90 e agora tem acesso ao resultado completo.
+                    </p>
+
+                    <button id="new-calc-btn" class="btn btn-primary btn-lg">
+                        FAZER NOVO CÁLCULO
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <p>&copy; 2026 Calculadora Premium. Todos os direitos reservados.</p>
+            <p class="security-info">🔒 Seus dados são seguros e encriptados</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
